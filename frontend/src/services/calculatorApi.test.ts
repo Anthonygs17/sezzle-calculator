@@ -69,7 +69,7 @@ describe('calculate', () => {
     ).rejects.toThrow('division by zero is not allowed');
   });
 
-  it('throws a fallback error when the backend does not provide a message', async () => {
+  it('throws a fallback error when the backend does not provide an error message', async () => {
     vi.spyOn(globalThis, 'fetch').mockResolvedValue(
       new Response(
         JSON.stringify({
