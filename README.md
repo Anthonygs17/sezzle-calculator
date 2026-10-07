@@ -85,13 +85,6 @@ cd backend
 go test ./...
 ```
 
-Coverage:
-
-```bash
-go test -coverprofile="./coverage.out" ./...
-go tool cover -func="./coverage.out"
-```
-
 ### Frontend
 
 ```bash
@@ -99,17 +92,29 @@ cd frontend
 npm run test:run
 ```
 
-Coverage:
+## Coverage
+
+### Backend
+
+- `internal/calculator`: 100%
+- `internal/handler`: 98%
+
+### Frontend
+
+- Statements: 82.27%
+- Branches: 76.92%
+- Functions: 75.00%
+- Lines: 82.05%
+
+Coverage reports can be regenerated with:
 
 ```bash
+# Backend
+go test -coverprofile="./coverage.out" ./...
+go tool cover -func="./coverage.out"
+
+# Frontend
 npm run test:coverage
-```
-
-Additional checks:
-
-```bash
-npm run build
-npm run lint
 ```
 
 ## Design Notes
