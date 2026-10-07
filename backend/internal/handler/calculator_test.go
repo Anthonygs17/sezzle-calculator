@@ -71,6 +71,16 @@ func TestCalculate(t *testing.T) {
 			expectedBody:   `{"error":"division by zero is not allowed"}`,
 		},
 		{
+			name:   "returns bad request when first operand is missing",
+			method: http.MethodPost,
+			body: `{
+				"operation": "add",
+				"operand2": 3
+			}`,
+			expectedStatus: http.StatusBadRequest,
+			expectedBody:   `{"error":"both operands are required"}`,
+		},
+		{
 			name:   "returns bad request when second operand is missing",
 			method: http.MethodPost,
 			body: `{
@@ -78,7 +88,7 @@ func TestCalculate(t *testing.T) {
 				"operand1": 10
 			}`,
 			expectedStatus: http.StatusBadRequest,
-			expectedBody:   `{"error":"missing second operand"}`,
+			expectedBody:   `{"error":"both operands are required"}`,
 		},
 		{
 			name:   "returns bad request for unsupported operation",

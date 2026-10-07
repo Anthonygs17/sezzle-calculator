@@ -6,16 +6,11 @@ import (
 )
 
 func TestCalculate(t *testing.T) {
-	operand2Three := 3.0
-	operand2Four := 4.0
-	operand2Two := 2.0
-	operand2Zero := 0.0
-
 	tests := []struct {
 		name          string
 		operation     string
 		operand1      float64
-		operand2      *float64
+		operand2      float64
 		expected      float64
 		expectedError error
 	}{
@@ -23,49 +18,42 @@ func TestCalculate(t *testing.T) {
 			name:      "adds two numbers",
 			operation: "add",
 			operand1:  2,
-			operand2:  &operand2Three,
+			operand2:  3,
 			expected:  5,
 		},
 		{
 			name:      "subtracts two numbers",
 			operation: "subtract",
 			operand1:  10,
-			operand2:  &operand2Three,
+			operand2:  3,
 			expected:  7,
 		},
 		{
 			name:      "multiplies two numbers",
 			operation: "multiply",
 			operand1:  5,
-			operand2:  &operand2Four,
+			operand2:  4,
 			expected:  20,
 		},
 		{
 			name:      "divides two numbers",
 			operation: "divide",
 			operand1:  10,
-			operand2:  &operand2Two,
+			operand2:  2,
 			expected:  5,
 		},
 		{
 			name:          "returns error when dividing by zero",
 			operation:     "divide",
 			operand1:      10,
-			operand2:      &operand2Zero,
+			operand2:      0,
 			expectedError: ErrDivisionByZero,
-		},
-		{
-			name:          "returns error when second operand is missing",
-			operation:     "add",
-			operand1:      10,
-			operand2:      nil,
-			expectedError: ErrMissingOperand,
 		},
 		{
 			name:          "returns error for unsupported operation",
 			operation:     "modulo",
 			operand1:      10,
-			operand2:      &operand2Two,
+			operand2:      3,
 			expectedError: ErrUnsupportedOperation,
 		},
 	}

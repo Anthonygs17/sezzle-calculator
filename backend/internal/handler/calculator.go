@@ -33,7 +33,17 @@ func Calculate(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	result, err := calculator.Calculate(req.Operation, req.Operand1, req.Operand2)
+	if req.Operand1 == nil || req.Operand2 == nil {
+		w.WriteHeader(http.StatusBadRequest)
+
+		json.NewEncoder(w).Encode(ErrorResponse{
+			Error: "both operands are required",
+		})
+
+		return
+	}
+
+	result, err := calculator.Calculate(req.Operation, *req.Operand1, *req.Operand2)
 
 	if err != nil {
 		switch {
